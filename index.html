@@ -23,20 +23,180 @@
       .animate-fade-in {
         animation: fade-in 0.7s ease-out forwards;
       }
+      .hidden {
+        display: none;
+      }
     </style>
-  <script type="importmap">
-{
-  "imports": {
-    "react-dom/": "https://esm.sh/react-dom@^19.1.0/",
-    "react/": "https://esm.sh/react@^19.1.0/",
-    "react": "https://esm.sh/react@^19.1.0"
-  }
-}
-</script>
-<link rel="stylesheet" href="/index.css">
+  <link rel="stylesheet" href="/index.css">
 </head>
   <body class="bg-violet-50">
-    <div id="root"></div>
-    <script type="module" src="/index.tsx"></script>
-  </body>
+    
+    <div class="min-h-screen text-purple-900 antialiased flex flex-col justify-center">
+      <main id="main-container" class="container mx-auto px-4 py-8 md:py-12 max-w-2xl relative">
+
+        <!-- Step 0: Start Screen -->
+        <div id="step-0" class="text-center">
+           <header class="text-center relative py-8">
+             <div class="absolute top-0 right-0 -mr-4 -mt-4 opacity-50">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-16 h-16 text-fuchsia-300 transform -scale-x-100"><path fill-rule="evenodd" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" clip-rule="evenodd" /></svg>
+             </div>
+             <div class="absolute bottom-0 left-0 -ml-4 -mb-4 opacity-50">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-12 h-12 text-violet-300"><path fill-rule="evenodd" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" clip-rule="evenodd" /></svg>
+             </div>
+             <h1 class="font-dancing-script text-5xl md:text-7xl font-bold text-purple-800">Obrigado por esses 6 meses</h1>
+             <p class="mt-4 text-xl text-purple-600">Meu presente pra você pelos nossos 6 meses juntos.  &gt;.&lt;</p>
+           </header>
+           <button id="start-button" class="mt-8 bg-fuchsia-500 text-white font-bold py-3 px-10 rounded-full hover:bg-fuchsia-600 transition-all duration-300 shadow-lg transform hover:scale-105">
+             Próximo
+           </button>
+        </div>
+
+        <!-- Step Container -->
+        <div id="content-container" class="hidden">
+           <!-- Content will be injected here -->
+        </div>
+
+        <!-- Navigation -->
+        <div id="navigation-controls" class="hidden">
+           <div class="mt-8">
+              <div class="w-full bg-purple-200/50 rounded-full h-2.5">
+                 <div id="progress-bar" class="bg-fuchsia-400 h-2.5 rounded-full transition-all duration-500 ease-out" style="width: 0%"></div>
+              </div>
+              <div class="flex justify-between items-center mt-4">
+                 <button id="back-button" class="bg-white/80 text-purple-600 font-semibold py-2 px-6 rounded-full hover:bg-white transition-all duration-300 shadow disabled:opacity-50 disabled:cursor-not-allowed">
+                   Voltar
+                 </button>
+                 <button id="next-button" class="bg-fuchsia-500 text-white font-bold py-2 px-6 rounded-full hover:bg-fuchsia-600 transition-all duration-300 shadow">
+                   Próximo
+                 </button>
+              </div>
+           </div>
+        </div>
+      </main>
+      <footer id="footer" class="text-center w-full p-4 hidden">
+         <p class="text-purple-400 text-sm">Com todo o meu amor, para sempre.</p>
+      </footer>
+    </div>
+
+    <script>
+      const storySteps = [
+          {
+              title: "Como Tudo Começou",
+              icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-12 h-12 text-violet-400"><path fill-rule="evenodd" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" clip-rule="evenodd" /></svg>`,
+              content: `
+                  <p class="text-lg leading-relaxed">A gente se conheceu em um lugar que eu nunca achei que ia encontrar alguém tão espcial que nem você. No Randochat só tinha gente esquisita, e por sorte eu pude te conhecer.</p>
+                  <p class="mt-4 text-lg leading-relaxed">Quando a gente voltou a namorar, foi a melhor coisa que podia ter acontecido comigo. Todo segundo do meu dia eu queria passar com você. Eu lembro que a gente ficava "brigando" pra alguém desligar a ligação porque a gente precisava dormir, mas nenhum de nós queria desligar.</p>
+                  <p class="mt-4 text-lg leading-relaxed">É muito engraçado pensar que isso aconteceu por acaso. Eu tive muita sorte de poder ter te conhecido.</p>
+              `
+          },
+          {
+              title: "O Que Vivemos Até Aqui",
+              icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-12 h-12 text-red-400"><path fill-rule="evenodd" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" clip-rule="evenodd" /></svg>`,
+              content: `
+                  <p class="text-lg leading-relaxed">Quando a gente começou a namorar, eu ainda tinha um pouco de medo de não dar certo de novo. Mas quando eu falei com a minha mãe sobre você, foi quando eu percebi que eu ia fazer de tudo pra dar certo. Eu não consigo me ver com outra pessoa que não seja você.</p>
+                  <p class="mt-4 text-lg leading-relaxed">Por isso que, mesmo nos momentos ruins que a gente tem, eu vou continuar pra sempre com você.</p>
+                  <p class="mt-4 text-lg leading-relaxed">Nesses 6 meses com você, eu aprendi que amar não é só sentir algo pelo outro, mas sim escolher ficar com o outro mesmo nos momentos ruins. Esses últimos dias a gente tem discutido bastante e não tá se falando muito, mas eu sei que daqui um tempo a gente vai ficar bem de novo.</p>
+              `
+          },
+          {
+              title: "O Que Eu Quero com Você",
+              icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-12 h-12 text-pink-400"><path fill-rule="evenodd" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" clip-rule="evenodd" /></svg>`,
+              content: `
+                  <p class="text-lg leading-relaxed">Eu não sei onde a vida vai levar a gente, mas se for com você, qualquer lugar pra mim vai ser especial.</p>
+                  <p class="text-lg leading-relaxed">Eu sei que agora você não pensa em ter filhos, mas um dia eu vou conseguir te convencer a mudar de ideia pra gente poder ter a Lua. Sol e Estrela não, porque eu não gostei do nome >:c</p>
+                  <p class="mt-4 text-lg leading-relaxed">Eu não tenho nenhum plano grandioso pro nosso futuro, mas a única coisa que eu tenho certeza que quero é poder te fazer feliz e que todo dia você ainda me escolha como a pessoa que você quer ao seu lado.</p>
+              `
+          },
+          {
+              title: "Para Meu Amorzinho",
+              icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-12 h-12 text-fuchsia-500"><path fill-rule="evenodd" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" clip-rule="evenodd" /></svg>`,
+              content: `
+                  <p class="text-lg leading-relaxed">Eu sei que sou meio chato às vezes, e que não sou a pessoa mais bonita do mundo, mas eu me esforço o máximo possível pra ser um namorado bom o suficiente pra você.</p>
+                  <p class="text-lg leading-relaxed">Gabi, você sempre foi e sempre vai ser o amor da minha vida.</p>
+                  <p class="mt-6 text-2xl font-dancing-script text-center text-fuchsia-600">Obrigado por esses 6 meses ao seu lado. <br/> Eu te amo muito meu amorzinho!!! <br/></p>
+              `
+          }
+      ];
+
+      document.addEventListener('DOMContentLoaded', () => {
+        let currentStep = 0;
+        const totalContentSteps = storySteps.length;
+
+        const step0 = document.getElementById('step-0');
+        const contentContainer = document.getElementById('content-container');
+        const navigationControls = document.getElementById('navigation-controls');
+        const footer = document.getElementById('footer');
+        const progressBar = document.getElementById('progress-bar');
+        
+        const startButton = document.getElementById('start-button');
+        const nextButton = document.getElementById('next-button');
+        const backButton = document.getElementById('back-button');
+
+        function renderStep(stepIndex) {
+            // content steps are 1-based
+            const stepData = storySteps[stepIndex - 1];
+
+            contentContainer.innerHTML = `
+              <section class="bg-white/50 backdrop-blur-sm rounded-2xl shadow-lg p-6 md:p-8 border border-white animate-fade-in">
+                <div class="flex items-center gap-4 mb-4">
+                  ${stepData.icon}
+                  <h2 class="font-dancing-script text-3xl md:text-4xl text-purple-700">${stepData.title}</h2>
+                </div>
+                <div class="text-purple-800/90 space-y-4">${stepData.content}</div>
+              </section>
+            `;
+        }
+
+        function updateView() {
+            if (currentStep === 0) {
+                step0.classList.remove('hidden');
+                contentContainer.classList.add('hidden');
+                navigationControls.classList.add('hidden');
+                footer.classList.add('hidden');
+            } else {
+                step0.classList.add('hidden');
+                contentContainer.classList.remove('hidden');
+                navigationControls.classList.remove('hidden');
+                footer.classList.remove('hidden');
+                
+                renderStep(currentStep);
+
+                const progressPercentage = (currentStep / totalContentSteps) * 100;
+                progressBar.style.width = `${progressPercentage}%`;
+
+                backButton.disabled = currentStep <= 1;
+                
+                if (currentStep >= totalContentSteps) {
+                    nextButton.classList.add('hidden');
+                } else {
+                    nextButton.classList.remove('hidden');
+                }
+            }
+        }
+        
+        startButton.addEventListener('click', () => {
+            currentStep = 1;
+            updateView();
+        });
+
+        nextButton.addEventListener('click', () => {
+            if (currentStep < totalContentSteps) {
+                currentStep++;
+                updateView();
+            }
+        });
+
+        backButton.addEventListener('click', () => {
+            if (currentStep > 1) {
+                currentStep--;
+                updateView();
+            }
+        });
+
+        // Initial view
+        updateView();
+      });
+    </script>
+  <script type="module" src="/index.tsx"></script>
+</body>
 </html>
